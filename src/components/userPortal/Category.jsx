@@ -35,6 +35,26 @@ const Category = () => {
   const handleCardClick = (id) => {
     dispatch(ProductIDCreator(id));
   };
+  const renderDescription = (description, id) => {
+    const maxLength = 100; // You can adjust the maximum length as needed
+    const isLongDescription = description.length > maxLength;
+
+    return (
+      <>
+        {isLongDescription ? (
+          <>
+            {`${description.substring(0, maxLength)}... `}
+            <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => handleCardClick(id)}>
+              Read More
+            </span>
+          </>
+        ) : (
+          description
+        )}
+      </>
+    );
+  };
+
 
   return (
     <>
@@ -63,7 +83,7 @@ const Category = () => {
                     />
                   }
                 >
-                  <Meta title={product.title} description={product.description} />
+                  <Meta title={product.title} description={renderDescription(product.description, product.id)} />
                   <h2>Price: ${product.price}</h2>
                 </Card>
               </Link>

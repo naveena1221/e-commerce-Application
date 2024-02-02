@@ -32,16 +32,11 @@ export default function AdminHeader() {
             Add Product
           </Link>
         </Menu.Item>
-        <Menu.Item key='/DeleteProduct'  >
-          <Link to='/DeleteProduct' >
-            Delete Product
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='/UpdateProduct'  >
+        {/* <Menu.Item key='/UpdateProduct'  >
           <Link to='/UpdateProduct' >
             Update Product
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item  >
         <Button type="link" onClick={handleLogout} style={{ fontSize: '20px',color:'white' }} >
         Logout

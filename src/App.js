@@ -12,7 +12,7 @@ import Cart from './components/userPortal/Cart';
 import Category from './components/userPortal/Category';
 import { useEffect, useState } from 'react';
 import AddProduct from '../src/components/adminPortal/AddProduct';
-import DeleteProduct from './components/adminPortal/DeleteProduct';
+
 import UpdateProduct from './components/adminPortal/UpdateProduct';
 
 
@@ -39,7 +39,6 @@ function App() {
           <>
             <Route path="/admin" element={<Admin />} />
             <Route path='/AddProduct' element={<AddProduct />} />
-            <Route path='/DeleteProduct' element={<DeleteProduct />} />
             <Route path='/UpdateProduct' element={<UpdateProduct />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/AllProducts" element={<AllProducts />} />
