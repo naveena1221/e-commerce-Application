@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import AdminHeader from './AdminHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import {ProductIDCreator, allProductCreator } from '../../redux/ActionCreator/ActionCreator';
@@ -22,7 +22,7 @@ function Admin() {
 
     useEffect(function(){
       getProductsInAdmin();
-    },[])
+    },[dispatch, getProductsInAdmin, adminStore.shoppingFeature.AllProducts])
 
     const handleDelete = (productId) => {
       fetch(`https://fakestoreapi.com/products/${productId}`, {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+
 import '../../../src/App.css';
 import backgroundImage from '../../LandingImage.jpg'
 import { Button } from 'antd';

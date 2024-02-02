@@ -4,7 +4,7 @@ import { Card, Row, Col } from 'antd';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import Meta from 'antd/es/card/Meta';
-import { ProductIDCreator, ProductsBasedOnCategory, productsBasedOnCategoryCreator } from '../../redux/ActionCreator/ActionCreator';
+import { ProductIDCreator, productsBasedOnCategoryCreator } from '../../redux/ActionCreator/ActionCreator';
 
 const Category = () => {
   const categorySelectorStore = useSelector((state) => state);
