@@ -5,6 +5,7 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 import Meta from 'antd/es/card/Meta';
 import { ProductIDCreator, productsBasedOnCategoryCreator } from '../../redux/ActionCreator/ActionCreator';
+import { getProdByCategory } from '../APICall/APICalls';
 
 const Category = () => {
   const categorySelectorStore = useSelector((state) => state);
@@ -13,16 +14,10 @@ const Category = () => {
 
   const getProductsByCategory = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products/category/${debouncedCategory}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
+      const data = await getProdByCategory(debouncedCategory);
       dispatch(productsBasedOnCategoryCreator(data));
     } catch (error) {
-      console.error('Error fetching products by category:', error);
-
+      console.error('Error fetching data:', error);
     }
   };
 

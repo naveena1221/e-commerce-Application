@@ -3,6 +3,7 @@ import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Spin } from 'antd';
 import { AddToCartCreator, ProductDetailsCreator } from '../../redux/ActionCreator/ActionCreator';
+import { getProductDetById } from '../APICall/APICalls';
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -12,39 +13,14 @@ const Product = () => {
 
   const getProductDetailsByID = async () => {
     try {
-      const res = await fetch(`https://fakestoreapi.com/products/${productDetailStore.shoppingFeature.ProductID}`);
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-
-      const productDetails = await res.json();
+      const productDetails = await getProductDetById(productDetailStore.shoppingFeature.ProductID);
       dispatch(ProductDetailsCreator(productDetails));
     } catch (error) {
       console.error('Error fetching product details:', error);
-      await retryNetworkCall();
     } finally {
       setLoading(false);
     }
   };
-
-  const retryNetworkCall = async () => {
-    try {
-      const res = await fetch(`https://fakestoreapi.com/products/${productDetailStore.shoppingFeature.ProductID}`);
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-
-      const productDetails = await res.json();
-      dispatch(ProductDetailsCreator(productDetails));
-    } catch (error) {
-      console.error('Error retrying network call:', error);
-      
-    } finally {
-     
-      setLoading(false);
-    }
-  };
-
   
   const memoizedGetProductDetails = useMemo(() => getProductDetailsByID, [
     dispatch,

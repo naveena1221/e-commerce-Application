@@ -4,6 +4,7 @@ import { Card, Row, Col,Skeleton } from "antd";
 import { ProductIDCreator, allProductCreator } from '../../redux/ActionCreator/ActionCreator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getProducts } from '../APICall/APICalls';
 
 export default function AllProducts() {
   const { Meta } = Card;
@@ -12,9 +13,12 @@ export default function AllProducts() {
 
 
   const getAllProducts=async()=>{
-    const response=await fetch(`https://fakestoreapi.com/products`, {method: 'GET'});
-    const data= await response.json();
-    dispatch(allProductCreator(data));
+    try {
+      const data = await getProducts();
+      dispatch(allProductCreator(data));
+    } catch (error) {
+      console.error('Error fetching all products:', error);
+    }
 
   }
   useEffect(function(){

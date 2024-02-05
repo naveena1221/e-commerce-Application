@@ -12,7 +12,6 @@ import Cart from './components/userPortal/Cart';
 import Category from './components/userPortal/Category';
 import { useEffect, useState } from 'react';
 import AddProduct from '../src/components/adminPortal/AddProduct';
-
 import UpdateProduct from './components/adminPortal/UpdateProduct';
 
 
