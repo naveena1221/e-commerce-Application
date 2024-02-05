@@ -18,11 +18,9 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem('userDetails');
     localStorage.removeItem('cartItems');
-    console.log('After logout:', localStorage.getItem('cartItems'));
     localStorage.removeItem('authenticated');
     persistor.purge();
     localStorage.removeItem('persist:root');
-    window.location.reload(true);
     navigate('/SignUp');
   };
 

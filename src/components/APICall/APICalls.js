@@ -1,19 +1,28 @@
 // apiCalls.js
 
 const BASE_URL = 'https://fakestoreapi.com';
-const methods={
-    getMethod:{
-        method: 'GET'
+const methods = {
+    getMethod: {
+      method: 'GET',
     },
-    deleteMethod:{ method: 'DELETE' },
+    deleteMethod: {
+      method: 'DELETE',
+    },
+    postMethod: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
     putMethod: {
-        method: 'PUT'
-    }
-}
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  };
 
-const headers={
-    
-}
+
 
 export const getProducts = async () => {
   try {
@@ -28,7 +37,7 @@ export const getProducts = async () => {
 
 export const deleteProduct = async (productId) => {
   try {
-    const response = await fetch(`${BASE_URL}/products/${productId}`, { method: 'DELETE' });
+    const response = await fetch(`${BASE_URL}/products/${productId}`, methods.deleteMethod);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -39,7 +48,7 @@ export const deleteProduct = async (productId) => {
 
 export const getProductById = async (productId) => {
     try {
-      const response = await fetch(`${BASE_URL}/products/${productId}`, { method: 'GET' });
+      const response = await fetch(`${BASE_URL}/products/${productId}`, methods.getMethod);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -51,10 +60,7 @@ export const getProductById = async (productId) => {
   export const updateProduct= async (productId,productData)=>{
     try{
         const response=await fetch(`${BASE_URL}/products/${productId}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            ...methods.putMethod,
             body: JSON.stringify(productData),
           });
       
@@ -99,6 +105,25 @@ export const getProductById = async (productId) => {
           return data;
         } catch (error) {
           console.error('Error fetching products by category:', error);
+          throw error;
+        }
+      };
+
+      export const addProductApi = async (productData) => {
+        try {
+          const response = await fetch(`${BASE_URL}/products`, {
+            ...methods.postMethod,
+            body: JSON.stringify(productData),
+          });
+      
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+      
+          const json = await response.json();
+          return json;
+        } catch (error) {
+          console.error('Error adding product:', error);
           throw error;
         }
       };

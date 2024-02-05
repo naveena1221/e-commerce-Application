@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, notification } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import AdminHeader from './AdminHeader';
+import { addProductApi } from '../APICall/APICalls';
 
 function Admin() {
   const [productData, setProductData] = useState({
@@ -19,20 +20,8 @@ function Admin() {
 
   const handleAddProduct = async () => {
     try {
-      const response = await fetch('https://fakestoreapi.com/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
-      });
+      const json = await addProductApi(productData);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const json = await response.json();
-      console.log(json);
 
       notification.success({
         message: 'Product Added',
